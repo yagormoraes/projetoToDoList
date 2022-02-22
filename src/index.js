@@ -1,17 +1,18 @@
 import express from "express";
+import userController from "./controller/userController.js";
+import tarefaController from "./controller/tarefaController.js";
 
 const app = express()
 const port = 3000
 
-app.get('/usuario', (req, res)=>{
-    res.send('Rota GET para entidade usuário')
-})
+userController(app)
 
-app.get('/tarefa', (req, res)=>{
-    res.send('Tarefa feita pelo usuário')
-})
+tarefaController(app)
 
 app.listen(port,()=>{
     console.log(`Testando o servido da http://localhost:${port}`);
 
 })
+
+
+
