@@ -1,0 +1,16 @@
+{
+  "name": "projetotodolist",
+  "version": "1.0.0",
+  "description": "projeto para criar uma API Rest para Todo List",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js"
+  },
+  "author": "Yago R Moraes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "type": "module"
+}
