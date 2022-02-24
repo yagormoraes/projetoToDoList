@@ -6,12 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/index.js",
-    "import": "node ./src/logica/importando.js"
+    "import": "node ./src/logica/importando.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "Yago R Moraes",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
