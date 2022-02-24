@@ -1,13 +1,14 @@
 const userController = (app)=>{
     app.get('/usuario', (req, res)=>{
         //res.send('Rota GET para entidade usuário')
-        res.send('Rastreamento da aplicação sendo feito com nodemon')
+        res.json({
+            "msg_get":"Pegando algo pela rota GET do usuário"
+        })
     })
 
     app.post('/usuario',(req,res)=>{
         res.json({
-            "nome" : "yago",
-            "msg" : "fala fiote"
+            "msg_post":"Rota POST de usuário ativada: user add ao banco de dados"
         }
 
         )
@@ -17,4 +18,3 @@ const userController = (app)=>{
 
 
 export default userController
-
