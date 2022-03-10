@@ -2,25 +2,40 @@ import Tarefa from "../model/Tarefa.js"
 
 const tarefaController = (app, bd)=>{
     app.get('/tarefa', (req, res)=>{
-        //res.send('Rota GET para entidade tarefa')
-        //res.send('Rastreamento da aplicação sendo feito com nodemon para a tarefa')
+        const allTarefas = bd.tarefas
         res.json({
-            "tarefa":bd.tarefas
+            "tarefa":allTarefas
         })
     })
 
     app.post('/tarefa',(req,res)=>{
         const body = req.body
-        const tarefaNova = new Tarefa(body.titulo,body.descricao,body.status,body.dataCriacao)
-        console.log(tarefaNova);
+        const tarefaNova = new Tarefa(body.titulo,body.descricao,body.status)
         bd.tarefas.push(tarefaNova)
 
         res.json({
-            "msg_post":"Rota POST de tarefa ativada: tarefa add ao banco de dados",
+            "msg_post":`Tarefa com título ${tarefaNova.titulo} inserida com sucesso`,
             "tarefa":tarefaNova
         }
 
         )
+    })
+
+    app.get('/tarefa/titulo/:titulo',(req,res)=>{
+        const titulo = req.params.titulo
+        const tituloFind = bd.tarefas.filter(tarefa => (tarefa.titulo == titulo))
+        res.json({
+            "titulo":tituloFind
+        })
+    })
+
+    app.delete('/tarefa/titulo/:titulo',(req,res)=>{
+        const titulo = req.params.titulo
+        const novoBD = bd.tarefas.filter(tarefa => (tarefa.titulo != titulo))
+        bd.tarefas = novoBD
+        res.json({
+            "msg":`Tarefa ${titulo} deletada`
+        })
     })
     
 }
