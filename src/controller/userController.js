@@ -1,14 +1,18 @@
 import Usuario from "../model/Usuario.js"
+import UsuarioDAO from "../DAO/UsuarioDAO.js"
 
 
 const userController = (app, bd)=>{
+    const usuarioDao = new UsuarioDAO(bd)
 
     app.get('/usuario', (req, res)=>{
-        const todosUsers = bd.usuarios
-
-        res.json({
-            "usuario":todosUsers
-        })
+       usuarioDao.pegaTodosUsuarios()
+       .then((resposta)=>{
+           res.json(resposta)
+       })
+       .catch((erro)=>{
+           res.json(erro)
+       })
     })
 
     app.post('/usuario',(req,res)=>{
