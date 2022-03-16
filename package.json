@@ -4,10 +4,10 @@
   "description": "projeto para criar uma API Rest para Todo List",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "start": "node ./src/server.js",
     "import": "node ./src/logica/importando.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/server.js"
   },
   "author": "Yago R Moraes",
   "license": "ISC",
@@ -17,6 +17,8 @@
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

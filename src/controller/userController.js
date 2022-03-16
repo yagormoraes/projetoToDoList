@@ -17,12 +17,21 @@ const userController = (app, bd)=>{
 
     app.post('/usuario',(req,res)=>{
         const body = req.body
-        const novoUser = new Usuario(body.nome, body.email, body.senha)
-        bd.usuarios.push(novoUser)
-        res.json({
-            "msg":`Usuário ${novoUser.nome} inserido com sucesso`,
-            "user":novoUser
-        })
+        try{
+            const novoUser = new Usuario(body.nome,body.email,body.senha)
+            usuarioDao.insereUsuario(novoUser)
+            .then((resposta)=>{
+                res.json(resposta)
+            })
+            .catch((erro)=>{
+                res.json(erro)
+            })
+        }catch (error){
+            res.json({
+                "msg":error.message,
+                "erro":true
+            })
+        }
     })
 
     app.get('/usuario/nome/:nome',(req,res)=>{
@@ -41,12 +50,14 @@ const userController = (app, bd)=>{
         })
     })
 
-    app.delete('/usuario/nome/:nome',(res,req)=>{
-        const nome = req.params.nome
-        const novoBD = bd.usuarios.filter(usuario => (usuario.nome != nome))
-        bd.usuarios = novoBD
-        res.json({
-            "msg" : `Tarefa ${nome} deletada`
+    app.delete('/usuario/id/:id',(res,req)=>{
+        const id = req.params.id
+        usuarioDao.deletaUsuario(id)
+        .then((resposta)=>{
+            res.json(resposta)
+        })
+        .catch((erro)=>{
+            res.json(erro)
         })
     })
     
